@@ -1,0 +1,18 @@
+- hosts: all
+  remote_user : ec2-user
+  become: yes
+  tasks:
+    - name: install the latest version of apache using ansible
+      yum:
+        name: httpd
+        state: present
+    -name: starting apache
+     service:
+       name: httpd
+       state: started
+    -name: copying files
+     copy:
+       src: index.html
+       dest: /var/www/html/index.html
+       mode: "0777"
+        
